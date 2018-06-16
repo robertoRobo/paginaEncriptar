@@ -1364,10 +1364,12 @@ window.onclick = function(event) {
     if(isset($_SESSION['session'])){
         include('conexiones/conexionBaseDatos.php');
         $usuario=$_SESSION['session'];
+        
+        $query = "SELECT foto.id_casa, domicilio, imagen 
+        FROM inmueble, foto  WHERE id_usuario='$usuario' and inmueble.id_casa = foto.id_casa";
 
-        $query = "call misCasas('$usuario')";
+        $resultado=$conexion->query($query);  
 
-$resultado=$conexion->query($query);  
 $temporal = "";
         $foto  = "";
         $contador = 0;
