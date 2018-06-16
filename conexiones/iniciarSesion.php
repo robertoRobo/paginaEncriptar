@@ -1,6 +1,7 @@
 <?php 
 	//
 	session_start();
+	include('Enigma.class.php');
 	if(isset($_SESSION['session'])){
 		echo "ya existe la sesion";
 		session_destroy();
