@@ -1,4 +1,5 @@
 <?php 
+    include('Enigma.class.php');
 		session_start();
  		
     $id = intval($_POST['nombre']);

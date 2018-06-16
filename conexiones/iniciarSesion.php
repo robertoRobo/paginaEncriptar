@@ -38,6 +38,6 @@
  	}
  	
  	header("Status: 301 Moved Permanently");
-	header("Location: http://localhost/segundacasa/segundaCasa.php");
+	header("Location: http://192.168.0.107");
 
 ?>
