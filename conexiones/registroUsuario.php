@@ -33,6 +33,9 @@
 	$universidad = $_POST['universidad'];
 	$pasword = Enigma::encrypt($_POST['psw']);
 	$foto = " ";
+	//echo $uname."__".Enigma::decrypt($correo)."__".Enigma::decrypt($nombre)."__".Enigma::decrypt($telefono);
+
+
 	if(isset($_FILES['fotoG'])){
 		$foto = addslashes(file_get_contents($_FILES['fotoG']['tmp_name']));
 	}

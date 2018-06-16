@@ -3,8 +3,8 @@
 	if (isset($_SESSION['session'])) {
 		# code...
 		include('conexionBaseDatos.php');
-		$mensualidad = (float)$_POST['costo'];
-		$direccion = $_POST['inmueble'];
+		$mensualidad = Enigma::encrypt($_POST['costo']);
+		$direccion = Enigma::encrypt($_POST['inmueble']);
 		$telefono = "";
 		$gas = "";
 		$wifi ="";
@@ -56,11 +56,11 @@
 			$servicios[$posicion] = $gas;
 			$posicion += 1;
 		}
-		$cuarto = intval($_POST['cuarto']);
-		$bano = intval($_POST['bano']);
-		$titulo= $_POST['titulo'];
+		$cuarto = Enigma::encrypt($_POST['cuarto']);
+		$bano = Enigma::encrypt($_POST['bano']);
+		$titulo= Enigma::encrypt($_POST['titulo']);
 
-		$descripcion = $_POST['descripcion'];
+		$descripcion = Enigma::encrypt($_POST['descripcion']);
 		$con = 0;
 		$foto = "";
 		$listaFotos = array();
@@ -91,16 +91,19 @@
         //echo "foto: ".$foto;
         $usuario = $_SESSION['session'];
 
-        $query = "call registroInmueble ('$direccion',$mensualidad,$bano,$cuarto,'$descripcion','$usuario', '$titulo')";
+        $query = "INSERT INTO inmueble(domicilio,costo_mensual,num_banos,num_habitaciones,descripcion,id_usuario,titulo) 
+        
+				VALUES('$direccion','$mensualidad','$bano','$cuarto','$descripcion','$usuario','$titulo')";
         
         $results = $conexion -> query($query);
 
-       	#$idCasa = "SELECT MAX(id_casa) as id_casa FROM inmueble WHERE id_usuario ='$usuario';"; 
+       	$idCasa = "SELECT MAX(id_casa) as id_casa FROM inmueble WHERE id_usuario ='$usuario'"; 
        	
        	$contador = count($listaFotos);
        	for ($i=0; $i < $contador ; $i++) { 
        		# code...
-       		$queryFoto = "call imagenCasa('$listaFotos[$i]','$usuario')";
+       		$queryFoto = "INSERT INTO foto(id_casa,imagen) 
+					    VALUES($idCasa,$listaFotos[$i])";
        			$results = $conexion -> query($queryFoto);
        	}
         
@@ -113,8 +116,8 @@
 
         for ($i=0; $i < $tamaño; $i++) { 
         	# code...
-        	$getIdInmueble = "INSERT INTO cuenta_con VALUES((SELECT MAX(id_casa)FROM  inmueble WHERE id_usuario='$usuario'),$servicios[$i]);";
-        	echo "<br> ".$getIdInmueble."<br>";
+        	$getIdInmueble = "INSERT INTO cuenta_con VALUES((SELECT MAX(id_casa)FROM  inmueble WHERE id_usuario='$usuario'),$servicios[$i])";
+        	//echo "<br> ".$getIdInmueble."<br>";
         	$results = $conexion -> query($getIdInmueble);
         } 
 
@@ -156,5 +159,5 @@
 		mysqli_close($conexion);
 	}
 	header("Status: 301 Moved Permanently");
-	header("Location: http://localhost/segundacasa/segundaCasa.php");
+	header("Location: http://localhost/baseDatos/segundaCasa.php");
 ?>

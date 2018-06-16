@@ -1,5 +1,4 @@
 <?php
-//Comentario de prueba
 class Enigma{
 	private static $key =  "";
 	public static function encrypt($string){
