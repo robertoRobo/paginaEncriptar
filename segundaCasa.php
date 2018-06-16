@@ -1043,7 +1043,7 @@ var mapProp= {
 var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeBGUXMq-XJYcCNcy6Mq8Uuj4A3NQNE-U&callback=myMap">
     
 </script>
 <!Modal editar perfil>
@@ -1664,7 +1664,7 @@ function mapaUso(origin){
 
 </script>
  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-FmCTFXtkEmklRzkboSe3gOUx49tGQfQ&callback=mapaUso">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeBGUXMq-XJYcCNcy6Mq8Uuj4A3NQNE-U&callback=mapaUso">
     </script>
 </body>
 </html>

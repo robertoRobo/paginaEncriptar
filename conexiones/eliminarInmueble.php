@@ -8,5 +8,5 @@ if(isset($_SESSION['session'])){
         mysqli_close($conexion);   
 }
 	header("Status: 301 Moved Permanently");
-	header("Location: http://localhost/baseDatos/segundaCasa.php");
+	header("Location: http://localhost/segundacasa/segundaCasa.php");
 ?>
