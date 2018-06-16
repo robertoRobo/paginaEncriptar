@@ -4,10 +4,10 @@
 		include('conexionBaseDatos.php');
 
 		$unombre = $_POST['unombre'];
-		$correo = $_POST['email'];
-		$nombre = $_POST['nombre'];
-		$telefono = $_POST['tel'] ;
-		$celular = $_POST['cel'];
+		$correo = Enigma::encrypt($_POST['email']);
+		$nombre = Enigma::encrypt($_POST['nombre']);
+		$telefono = Enigma::encrypt($_POST['tel']);
+		$celular = Enigma::encrypt($_POST['cel']);
 		$universidad = $_POST['universidad'];
 		
 		$foto = " ";

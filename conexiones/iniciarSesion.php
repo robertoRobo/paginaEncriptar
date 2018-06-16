@@ -10,7 +10,7 @@
 		include('conexionBaseDatos.php');
 
 	 	$usuario = $_POST['uname'];
-	 	$password = $_POST['psw'];
+	 	$password = Enigma::encrypt($_POST['psw']);
 
 		$query = "SELECT id_usuario,contrasena FROM persona WHERE id_usuario = '$usuario' AND contrasena = '$password'";
 	 	//#$query = "CALL usuarios('$usuario','$password')";
@@ -19,13 +19,12 @@
 	 	$rows_affected = intval($results->num_rows);
 	 	$exito = "no";
 	 	if($rows_affected != 0){
-			echo "userL: ".$usuario." pswL: ".$password." <br>";
+			//echo "userL: ".$usuario." pswL: ".$password." <br>";
 			$row = $results->fetch_assoc();
 
 			$usuario2 = $row['id_usuario'];
-			$password2  = $row['contrasena'];
-
-			if($usuario == $usuario2 && $password == $password2){
+			$password2  = Enigma::decrypt($row['contrasena']);
+			if($usuario == $usuario2 && Enigma::decrypt($password) == $password2){
 		 		$_SESSION['session'] = $usuario;
 				echo "user: ".$usuario." pwd:".$password."<br>";
 				$exito = "si";
@@ -35,11 +34,6 @@
 	 	}else{
 	 		echo $rows_affected;
 	 	}
-
-	 	//if(isset($_SESSION['session'])){
-	 		//echo "session started ".$_SESSION['session']."<br>";
-	 	//}
-	 	//echo "resuts: ".$results->num_rows."<br>";
 	 	mysqli_close($conexion);	
  	}
  	
