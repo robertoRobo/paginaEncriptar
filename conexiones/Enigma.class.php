@@ -1,5 +1,4 @@
 <?php
-
 class Enigma{
 	private static $key =  "";
 	public static function encrypt($string){
