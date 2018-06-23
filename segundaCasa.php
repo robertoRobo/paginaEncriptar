@@ -41,8 +41,10 @@ and open the template in the editor.
                             <div class="container-fluid">
            <?php 
                     session_start();
+                    
                     if(isset($_SESSION['session'])){
                         include('conexiones/conexionBaseDatos.php');
+                        include('Enigma.class.php');
                         $usuario = $_SESSION['session'];
                         $query = "SELECT imagen FROM persona WHERE id_usuario = '$usuario'";
                         $result = $conexion->query($query);
@@ -93,6 +95,7 @@ and open the template in the editor.
 <!Contenedor carousel>
         <?php
    include('conexiones/conexionBaseDatos.php');
+   include('Enigma.class.php');
    $query = " SELECT * FROM reciente";
 
         $results = $conexion->query($query);
@@ -148,6 +151,7 @@ and open the template in the editor.
     <?php
             }
             include('conexiones/conexionBaseDatos.php');
+            include('Enigma.class.php');
             $css = intval($idCasa[$i]);
             $direccion = "SELECT domicilio FROM inmueble WHERE id_casa = $css";
             $resul = $conexion->query($direccion);
@@ -598,7 +602,7 @@ and open the template in the editor.
         #echo "bano: ".$bano."<br>";
        
         include('conexiones/conexionBaseDatos.php');
-
+        include('Enigma.class.php');
         $filtro = "SELECT * FROM inmueble WHERE costo_mensual <= $mensualidad and num_banos <= $bano and num_habitaciones <= $cuartos ";
         $results = $conexion->query($filtro);
 ?>
@@ -669,7 +673,7 @@ and open the template in the editor.
             
 <?php $con  = 1 ;
         include('conexiones/conexionBaseDatos.php');
-         
+        include('Enigma.class.php');
          $filtro = "SELECT * FROM resultados";
 
 
@@ -1050,6 +1054,7 @@ var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 <?php 
     if(isset($_SESSION['session'])) {
         include('conexiones/conexionBaseDatos.php');
+        include('Enigma.class.php');
         $usuario = $_SESSION['session'];
         $query = "SELECT * FROM persona WHERE id_usuario = '$usuario'";
         $results = $conexion->query($query);
@@ -1065,19 +1070,19 @@ var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
         </div>
         <div class="container">
             <label><b>Nombre de Usuario</b></label><p></p>
-            <input type="text" name="unombre" value="<?= $rows['id_usuario']?>"  required maxlength="25" class="informacion">
+            <input type="text" name="unombre" value="<?=Enigma::decrypt( $rows['id_usuario'])?>"  required maxlength="25" class="informacion">
             <p></p>
             <label><b>Correo Electrónico</b></label><p></p>
-            <input type="email" name="email" value="<?= $rows['correo'] ?>" required maxlength="100" class="informacion">
+            <input type="email" name="email" value="<?=Enigma::decrypt( $rows['correo']) ?>" required maxlength="100" class="informacion">
             <p></p>
             <label><b>Nombre Completo</b></label><p></p>
-            <input type="text" name="nombre" value="<?= $rows['nombre_completo'] ?>"  required maxlength="100" size="100" class="informacion"></input>
+            <input type="text" name="nombre" value="<?= Enigma::decrypt($rows['nombre_completo']) ?>"  required maxlength="100" size="100" class="informacion"></input>
             <p></p>
             <label><b>Teléfono</b></label><p></p>
-            <input type="tel"  name="tel" value="<?= $rows['telefono'] ?>" maxlength="16" class="informacion">
+            <input type="tel"  name="tel" value="<?= Enigma::decrypt($rows['telefono']) ?>" maxlength="16" class="informacion">
             <p></p>
             <label><b>Celular</b></label><p></p>
-            <input type="tel" name="cel" value="<?= $rows['celular'] ?>" required maxlength="16" class="informacion">
+            <input type="tel" name="cel" value="<?=Enigma::decrypt( $rows['celular']) ?>" required maxlength="16" class="informacion">
             <p></p>
             <label><b>Universidad</b></label><p></p>
             <select name="universidad">
@@ -1363,6 +1368,7 @@ window.onclick = function(event) {
     //session_start();
     if(isset($_SESSION['session'])){
         include('conexiones/conexionBaseDatos.php');
+        include('Enigma.class.php');
         $usuario=$_SESSION['session'];
         $query = "SELECT foto.id_casa, domicilio, imagen 
         FROM inmueble, foto  WHERE id_usuario='$usuario' and inmueble.id_casa = foto.id_casa";

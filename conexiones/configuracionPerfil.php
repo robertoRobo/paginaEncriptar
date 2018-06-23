@@ -40,6 +40,6 @@
 		$conexion->query($query);
 		mysqli_close($conexion);
 		header("Status: 301 Moved Permanently");
-		header("Location: http://192.168.0.107");
+		header("Location: https://192.168.0.107");
 	}
 ?>
