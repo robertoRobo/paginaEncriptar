@@ -156,7 +156,7 @@ and open the template in the editor.
                             <div class="col-lg-4 col-xs-4 col-md-4 col-sm-4" 
                                  style="border-style: solid;color:#FE642E;border-width: 5px;width:445px;height:410px"">
                                 <a href="#">
-                                    <img onclick="hola(<?= $idCasa[$i]?>,'<?= $r['domicilio'] ?>')" src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $fotosA[$i]);?>" 
+                                    <img onclick="hola(<?= $idCasa[$i]?>,'<?= Enigma::decrypt($r['domicilio']) ?>')" src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $fotosA[$i]);?>" 
                                          class="img-responsive" style = " width:100%; height:100%">
                                 </a>
                             </div>
@@ -620,7 +620,7 @@ and open the template in the editor.
                     <div class="col-md-3" id="mitad">
                             <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?=Enigma::decrypt( $row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -630,7 +630,7 @@ and open the template in the editor.
                 <div class="col-md-3" id="mitad2">
                                 <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= Enigma::decrypt($row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -642,7 +642,7 @@ and open the template in the editor.
                         <div class="col-md-3" id="mitad2">
                                 <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= Enigma::decrypt($row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -688,7 +688,7 @@ and open the template in the editor.
                     <div class="col-md-3" id="mitad">
                             <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= Enigma::decrypt($row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -698,7 +698,7 @@ and open the template in the editor.
                 <div class="col-md-3" id="mitad2">
                                 <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= Enigma::decrypt($row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -710,7 +710,7 @@ and open the template in the editor.
                         <div class="col-md-3" id="mitad2">
                                 <div>
                                 <button id="close-image" data-toggle="collapse"
-                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= $row['domicilio'] ?>')" style="width:auto;">
+                                        onclick="hola(<?= $row['id_casa'] ?>,'<?= Enigma::decrypt($row['domicilio']) ?>')" style="width:auto;">
                                     <img src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $r2['imagen']);?>" alt="El tito"></button>
                             </div>
                         </div>
@@ -1364,7 +1364,6 @@ window.onclick = function(event) {
     if(isset($_SESSION['session'])){
         include('conexiones/conexionBaseDatos.php');
         $usuario=$_SESSION['session'];
-        
         $query = "SELECT foto.id_casa, domicilio, imagen 
         FROM inmueble, foto  WHERE id_usuario='$usuario' and inmueble.id_casa = foto.id_casa";
 
@@ -1386,12 +1385,12 @@ $temporal = "";
                 <div class="row">
                 <div class="col-md-6">
                 <div class="col-md-2">
-                    <label><img onclick="hola(<?= $temporal?>,'<?= $rows['domicilio'] ?>'),document.getElementById('id07').style.display='none'" src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $rows['imagen']);?>"
+                    <label><img onclick="hola(<?= $temporal?>,'<?=Enigma::decrypt($rows['domicilio']) ?>'),document.getElementById('id07').style.display='none'" src="data:image/jpg;image/x-png;image/gif;image/jpeg;base64,<?php echo base64_encode( $rows['imagen']);?>"
                                          style="width:50px;height:50px;border-radius: 60px">
                     </label>
                 </div>
                 <div class="col-md-4">
-                    <label><?=$rows['domicilio'] ?></label>
+                    <label><?=Enigma::decrypt($rows['domicilio']) ?></label>
                 </div>
                 </div>
                 <div class="col-md-6">

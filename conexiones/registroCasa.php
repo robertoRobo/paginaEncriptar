@@ -99,12 +99,12 @@
         $results = $conexion -> query($query);
 
        	$idCasa = "SELECT MAX(id_casa) as id_casa FROM inmueble WHERE id_usuario ='$usuario'"; 
-       	
+       	$idC = $conexion -> query($idCasa);
        	$contador = count($listaFotos);
        	for ($i=0; $i < $contador ; $i++) { 
        		# code...
        		$queryFoto = "INSERT INTO foto(id_casa,imagen) 
-					    VALUES($idCasa,$listaFotos[$i])";
+					    VALUES($idCasa,'$listaFotos[$i])'";
        			$results = $conexion -> query($queryFoto);
        	}
         

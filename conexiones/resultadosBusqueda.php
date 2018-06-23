@@ -66,13 +66,13 @@
 <!Informacion general de la casa>
                             <div class="container">
                                 <div class="col-md-3 col-lg-3">
-                                    <label style="color:white;" for="titulo"><font size="6"><?= $row['titulo'] ?></font></label>
+                                    <label style="color:white;" for="titulo"><font size="6"><?= Enigma::decrypt($row['titulo']) ?></font></label>
                                     <br>
-                                    <label style="color:white" for="descripcion"> <?= $row['descripcion'] ?> </label>
-                                    <label style="color:blue" for="domicilio"> <?= $row['domicilio'] ?> </label>
+                                    <label style="color:white" for="descripcion"> <?= Enigma::decrypt($row['descripcion']) ?> </label>
+                                    <label style="color:blue" for="domicilio"> <?= Enigma::decrypt($row['domicilio']) ?> </label>
                                     <hr style="color:#DF0174;">
-                                    <p><span class="glyphicon glyphicon-usd" style="font-size: 30px"></span><label style="color:white;font-size: 25px" for="precio"><?= $row['costo_mensual'] ?> MXN</label></p>
-                                    <p><i class="fa fa-bed" style="color:#DF0174"></i><label for="cuartos"> X<?= $row['num_habitaciones']?></label><i class="fa fa-wifi" style="margin-left: 62px;color:#DF0174"></i><label for="internet"> X<?= $row['num_banos']?></label></p> 
+                                    <p><span class="glyphicon glyphicon-usd" style="font-size: 30px"></span><label style="color:white;font-size: 25px" for="precio"><?= Enigma::decrypt($row['costo_mensual']) ?> MXN</label></p>
+                                    <p><i class="fa fa-bed" style="color:#DF0174"></i><label for="cuartos"> X<?= $row['num_habitaciones']?></label><i class="fa fa-wifi" style="margin-left: 62px;color:#DF0174"></i><label for="internet"> X<?=Enigma::decrypt( $row['num_banos'])?></label></p> 
 
                                     <table>
 <?php
@@ -161,12 +161,12 @@
  			# code...
  			?>
  			<input type="text" style=" color:#DF0174;border-radius:10px;width:255px" 
-                            placeholder="tito y los dinosaurios" value="<?= $datos['nombre_completo'] ?>" disabled="disabled">
+                            placeholder="tito y los dinosaurios" value="<?=Enigma::decrypt( $datos['nombre_completo']) ?>" disabled="disabled">
                     <br>
                     <input type="email" style="color:#DF0174;border-radius:10px;width:255px" 
-                           placeholder="Correo: ejemplo@hotmail.com" value="<?= $datos['correo'] ?>" disabled="disabled">
+                           placeholder="Correo: ejemplo@hotmail.com" value="<?= Enigma::decrypt($datos['correo']) ?>" disabled="disabled">
                     <input type="tel" style="color:#DF0174;border-radius:10px;width:255px" 
-                            placeholder="Correo: 4491234567" value="<?= $datos['telefono'] ?>" disabled="disabled">
+                            placeholder="Correo: 4491234567" value="<?= Enigma::decrypt($datos['telefono']) ?>" disabled="disabled">
                     
 
  		<?php
