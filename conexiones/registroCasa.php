@@ -104,7 +104,7 @@
        	for ($i=0; $i < $contador ; $i++) { 
        		# code...
        		$queryFoto = "INSERT INTO foto(id_casa,imagen) 
-					    VALUES($idCasa,'$listaFotos[$i])'";
+					    VALUES($idC['id_casa'],'$listaFotos[$i])'";
        			$results = $conexion -> query($queryFoto);
        	}
         
